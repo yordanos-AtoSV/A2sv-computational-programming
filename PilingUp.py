@@ -17,7 +17,7 @@ def PilingUp():
                 if previous<block[leftptr]:
                     flag="No"
                     break
-                previos=block[leftptr]    
+                previous=block[leftptr]    
                 leftptr+=1
             else:
                 if previous<block[rightptr]:
