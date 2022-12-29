@@ -1,7 +1,7 @@
 class Solution:
     def calculateD(self, x1:int, y1:int, x2:int, y2:int):
 
-        dest=abs(x1 - x2) + abs(y1 - y2)
+        dist=abs(x1 - x2) + abs(y1 - y2)
         return dest
 
     def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
