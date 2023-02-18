@@ -12,11 +12,9 @@ class Solution:
     prev = dummy
 
     for _ in range(m - 1):
-      prev = prev.next  # Point to the node before the sublist [m, n]
+      prev = prev.next  
 
-    tail = prev.next  # Will be the tail of the sublist [m, n]
-
-    # Reverse the sublist [m, n] one by one
+    tail = prev.next  
     for _ in range(n - m):
       cache = tail.next
       tail.next = cache.next
