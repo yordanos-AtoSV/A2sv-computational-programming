@@ -6,9 +6,7 @@ class Solution:
         p_count = Counter(p)
         s_count = Counter()
         result = []
-        for i in range(p_size):
-            print (p_count.values())
-        print(p_count[1])
+      
         for i in range(s_size):
             s_count[s[i]] += 1
             if i >= p_size:
