@@ -1,17 +1,19 @@
 class Solution:
     def countVowelStrings(self, n: int) -> int:
-        a = 5
-        self.counti = 0
+        a = ["a","e","i","o","u"]
+        allPath = []
         
-        def back(k,i):
+        def back(k,i, path):
             if k == n:
-                self.counti += 1
+                allPath.append(''.join(path))
                 return
             
-            for j in range(i,a):
-                back(k+1, j)
+            for j in range(i,len(a)):
+                path.append(a[j])
+                back(k+1, j,path)
+                path.pop()
         
-        for i in range(a):
-            back(1,i)
+        for i in range(len(a)):
+            back(1,i,[a[i]])
         
-        return self.counti
+        return len(allPath)
