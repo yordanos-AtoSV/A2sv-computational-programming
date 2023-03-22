@@ -18,7 +18,7 @@ class Solution:
                 
             stack.append(i)
   
-        print(stack)    
+     
         if stack[-1] != -1:
             
             while stack[-1] != -1:
