@@ -1,13 +1,10 @@
 class Solution:
       def peakIndexInMountainArray(self, arr: List[int]) -> int:
-        l = 0
-        r = len(arr) - 1
+            stack = []
+            for i in range(len(arr)):
+                if stack and arr[stack[-1]] > arr[i]:
+                    return stack[-1]
+                
+                stack.append(i)
+                    
 
-        while l < r:
-            m = (l + r) // 2
-            if arr[m] < arr[m + 1]:
-                l = m + 1
-            else:
-                r = m
-
-        return l
