@@ -4,7 +4,7 @@ class Solution:
         ans = []
         path = []
         size = len(nums)
-        sets = []
+        sets = 0
         def recurs(sets, path):
             if len(path) == size:
                 ans.append(path[:])
@@ -12,15 +12,18 @@ class Solution:
                 return
             
             for i in range(len(nums)):
-                if nums[i] in sets:
-                    continue
-                else:
-                    sets.append(nums[i])
+                temp = 1 << i
+                ands = temp & sets
+                if ands == 0:
+                    sets |= temp
                     path.append(nums[i])
                     recurs(sets,path )
                     path.pop()
-                    sets.pop()
+                    sets ^= temp
          
+                else:
+                    continue
+                    
                     
                 
         recurs(sets, path)
