@@ -10,17 +10,19 @@ class Solution:
     def maxDepth(self, root: 'Node') -> int:
         if not root :
             return 0
-        depth  = 0
-        def dfs(node,num):
-            nonlocal depth
+      
+        def dfs(node):
+         
             if not node.children:
-                depth = max(num + 1, depth)
-                return 
-            
-            for nextnode in node.children:
-                dfs(nextnode, num + 1)
-            
-            return
                 
-        dfs(root, 0)
-        return depth
+                return 1
+            
+            temp = []    
+            for nextnode in node.children:
+                temp.append(dfs(nextnode))
+            
+            return max(temp) + 1    
+
+                
+        return dfs(root)
+      
