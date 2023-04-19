@@ -1,15 +1,30 @@
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
-        target = len(graph) - 1
-        paths, targets = [[0]], []
-        while paths:
-            path = paths.pop(0)
-            edges = graph[path[-1]]
-            if not edges: 
-                continue
-            for edge in edges:
-                if edge==target:
-                    targets.append(path+[edge])
-                else:
-                    paths = [path+[edge]] + paths
-        return targets
+        
+        adjlist = defaultdict(list)
+        for i in range(len(graph)):
+            for j in range(len(graph[i])):
+                adjlist[i].append(graph[i][j])
+                
+        ans = []
+        def dfs(node, path ):
+            
+                if node == len(graph) - 1:
+                    path.append(node)
+                    ans.append(path[:])
+                    path.pop()
+           
+                path.append(node)
+               
+                
+                for nodes in adjlist[node]:
+                    dfs(nodes, path)
+                    
+                 
+                
+                path.pop()
+                
+
+        dfs(0, [])
+            
+        return ans    
