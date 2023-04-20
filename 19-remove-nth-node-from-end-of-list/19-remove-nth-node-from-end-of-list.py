@@ -14,7 +14,7 @@ class Solution:
             else:
                 break
         
-        print(size)
+  
         if size == 1:
             return 
         
