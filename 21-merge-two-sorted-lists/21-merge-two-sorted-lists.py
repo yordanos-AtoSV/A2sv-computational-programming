@@ -28,14 +28,12 @@ class Solution:
         
             
         if cur1:
-            while cur1 :
+           
                 temp.next = cur1
-                temp = temp.next
-                cur1 = cur1.next
+             
         if cur2:
-            while cur2 :
+            
                 temp.next = cur2
-                temp = temp.next
-                cur2 = cur2.next
+               
             
         return dummy.next
