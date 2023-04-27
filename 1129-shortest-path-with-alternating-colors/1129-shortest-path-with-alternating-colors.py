@@ -12,8 +12,8 @@ class Solution:
         queue = deque()
         visited = set()
         answer = [-1] * n
-        queue.append((0, None))
-        visited.add((0, None))
+        queue.append((0, -1))
+        visited.add((0, -1))
         level = 0
         while queue :
                 n = len(queue)
