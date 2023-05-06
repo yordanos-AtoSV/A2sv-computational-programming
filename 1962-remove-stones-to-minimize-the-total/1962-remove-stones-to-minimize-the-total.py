@@ -9,10 +9,9 @@ class Solution:
             new = floor(temp / 2)
             heappush(piles, new)
             
-        for i in range(len(piles)):
-            piles[i] *= -1
+
             
-        return sum(piles)
+        return -sum(piles)
             
             
         
