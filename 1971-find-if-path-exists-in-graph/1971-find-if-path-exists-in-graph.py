@@ -1,5 +1,8 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        if destination == source:
+            return True
+        
         adjlist = defaultdict(list)
         
         for edge in edges:
@@ -8,19 +11,19 @@ class Solution:
             
         
         visited  = set()
-        def recur(node, visited):
-            if node == destination:
-                return True
+        stack = []
+        stack.append(source)
+        
+        while stack:
+            cur = stack.pop()
+
+            for neigh in adjlist[cur]:
+
+                if neigh not in visited :
+                    visited.add(neigh)
+                    stack.append(neigh)
+
+        if destination in visited:
+            return True
             
-            visited.add(node)
-            
-            for neigh in adjlist[node]:
-                if neigh not in visited:
-                    found = recur(neigh, visited)
-                    
-                    if found :
-                        return True
-                
-            return False    
-            
-        return recur(source, visited)
+        return False
