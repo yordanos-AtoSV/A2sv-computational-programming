@@ -1,28 +1,49 @@
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         n = len(points)
-        graph = defaultdict(list)
+        parent = [i for i in range(n)]
+        parent = [i for i in range(n)]
+        Hash = defaultdict(list)
+        rank = [0]*(n+1)
+        minDist = 0
+        def find(x):
+            if x == parent[x]:
+                return x
+            r = find(parent[x])
+            parent[x] = r
+            return r
+            
+        def union(x, y ,d):
+            nonlocal minDist
+            rep_x = find(x)
+            rep_y = find(y)
+            if rep_x != rep_y:
+                minDist += d
+                if rank[rep_x] > rank[rep_y]:
+                    parent[rep_y] = rep_x
+                    rank[rep_x] += rank[rep_y]
+                else:
+                    parent[rep_x] = rep_y
+                    rank[rep_y] += rank[rep_x]
+
+
+        connection = []
         for i in range(n):
-            x1, y1 = points[i]
-            for j in range(i + 1, n):
-                x2, y2 = points[j]
-                cost = abs(x2 - x1) + abs(y2 - y1)
-                graph[i].append((cost, j))
-                graph[j].append((cost, i))
-         
- 
-        heap = [(0, 0)]
+            for j in range(i + 1 ,n):
+                    xi , yi = points[i]
+                    xj , yj = points[j]
+                    val = abs(xi - xj) + abs(yi - yj)
+                    connection.append([val ,(i,j)])
+        connection.sort()
         visited = set()
-        res = 0
-        
-        while len(visited) < n:
-            
-            cost, node = heappop(heap)
-            if node not in visited:
-                visited.add(node)
-                res += cost
-                for cst , neig in graph[node]:
-                        if neig not in visited:
-                            heappush(heap, (cst, neig))
-            
-        return res
+        for  d , (x,y) in connection:
+            if len(visited) <= n:
+                union(x,y,d)
+                visited.add(x)
+                visited.add(y)
+            else:
+                break
+
+
+
+        return minDist
