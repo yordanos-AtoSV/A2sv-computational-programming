@@ -1,14 +1,18 @@
 class Solution:
     def tribonacci(self, n: int) -> int:
-        if n < 2:
-            return n
-        arr = [0,0, 1, 1]
-        for i in range(3, n + 1):
-            arr[0] = arr[1] 
-            arr[1] = arr[2]
-            arr[2] = arr[3]
-            arr[3] = arr[2] + arr[1] + arr[0]
+        memo = {}
+        
+        def solve(n):
+            if n == 1 or n == 2:
+                return 1
+            if n == 0:
+                return 0
             
-        return arr[3]
+            if n not in memo:
+                memo[n] = solve(n - 1) + solve(n - 2) + solve(n - 3)
+                return memo[n]
             
-            
+            return memo[n]
+        
+        return solve(n)
+        
