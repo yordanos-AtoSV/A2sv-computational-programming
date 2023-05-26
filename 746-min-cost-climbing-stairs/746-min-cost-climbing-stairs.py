@@ -15,5 +15,5 @@ class Solution:
             return memo[i]
         
         solve(0)
-        print(memo[0])
+  
         return min(memo[0], memo[1])
