@@ -1,14 +1,28 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         
-        dp = [float("inf")] * (amount + 1)
-        dp[0] = 0
-        for i in range(1, amount + 1):
-            for c in coins:
-                if i - c >= 0:
-                    dp[i] = min(dp[i], 1 + dp[i - c])
-                    
-        if dp[amount] == inf:
-            return -1
+        memo = {}
         
-        return dp[amount]
+        def solve(n):
+            temp = float("inf")
+            if n == 0:
+                return 0
+            if n < 0:
+                return inf
+            if n in memo:
+                return memo[n]
+            
+            for c in coins:
+            
+               temp = min(temp,  solve(n - c))
+                    
+            memo[n] = temp + 1
+            
+            return memo[n]
+        
+        
+        ans = solve(amount)        
+        return  ans if ans != inf else -1
+    
+    
+    
