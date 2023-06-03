@@ -1,13 +1,31 @@
 class Solution:
     def maxProfit(self, prices: List[int], fee: int) -> int:
-        n = len(prices) 
-        buy = [0] * n
-        sell = [0] * n
-        buy[0] = -prices[0]
         
-        for i in range(1, len(prices)):
-            buy[i] = max(buy[i - 1], sell[i - 1] - prices[i])
-            sell[i] = max(sell[i -1],( buy[i - 1] + prices[i]) - fee )
+        memo = {}
+        
+        def dp(idx, d_s):
+            
+            if idx > len(prices) - 1:
+                return 0
+            curbal = 0 
+            
+            if (idx, d_s) not in memo:
+                if d_s == 1:
+                    v1 = dp(idx + 1, 1) 
+                    v2 = dp(idx + 1, 2) - fee - prices[idx]
+                    curbal = max(v1, v2) 
+                    memo[(idx, d_s)] = curbal
+                    
+                
+                if d_s == 2:
+                    v3 = dp(idx + 1, 2) 
+                    v4 = dp(idx + 1, 1) + prices[idx]
+
+                    curbal  = max(v3, v4) 
+                    memo[(idx, d_s)] = curbal
+                    
+            return memo[(idx, d_s)]
             
             
-        return sell[-1]
+        
+        return dp(0, 1)
